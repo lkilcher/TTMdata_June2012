@@ -1,0 +1,27 @@
+# Ignore data files for now, perhaps later they will be included in git-lfs?
+*.h5
+*.VEC
+*.vec
+*.csv
+*.mat
+*.hdr
+*.ssl
+*.pyc
+
+# Ignore the decklog
+Admiralty_decklog_Jun2012.txt
+
+# Ignore the SBE data
+ct/
+
+private/
+
+photos/
+*#
+.#*
+
+.DS_store
+
+tmp/
+
+Thumbs.db
