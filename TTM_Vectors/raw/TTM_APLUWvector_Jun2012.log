@@ -1,0 +1,46 @@
+============================================================
+Deployment   : APLUW_
+Current time : 6/7/2012 9:07:22 AM
+Start at     : 6/11/2012 12:00:00 PM
+Comment:
+APL-UW vector on Tidal Turbulence Mooring in Admiralty, times PDT
+------------------------------------------------------------
+Sampling rate        (Hz) : 32
+Nominal vel. range  (m/s) : 4.00
+Burst interval        (s) : CONTINUOUS
+Samples per burst         : N/A
+Sampling volume      (mm) : 14.9
+Transmit length      (mm) : 4.0
+Measurement load      (%) : 36
+Power level               : HIGH
+Compass upd. rate     (s) : 1
+Coordinate System         : XYZ
+Speed of sound      (m/s) : MEASURED
+Salinity            (ppt) : 30
+Output sync               : VECTOR
+Start on sync             : DISABLED
+Sample on sync            : DISABLED
+Analog output             : DISABLED
+Analog output range       : N/A
+Analog input 1            : NONE
+Analog input 2            : NONE
+Analog input power out    : DISABLED
+File wrapping             : OFF
+Serial output/TellTale    : OFF
+------------------------------------------------------------
+Assumed duration   (days) : 2.5
+Battery utilization   (%) : 108.0
+Battery level         (V) : 13.4
+Recorder size        (MB) : 3886
+Recorder free space  (MB) : 3587.944
+Memory required      (MB) : 164.0
+Vertical vel. range (m/s) : 1.5
+Horizon. vel. range (m/s) : 5.3
+------------------------------------------------------------
+Instrument ID             : VEC 9062
+Head ID                   : VCH 4811
+Firmware version          : 3.34
+------------------------------------------------------------
+Vector Version 1.32
+Copyright (C) Nortek AS
+============================================================
