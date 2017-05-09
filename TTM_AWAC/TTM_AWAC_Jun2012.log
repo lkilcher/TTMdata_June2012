@@ -1,0 +1,101 @@
+============================================================
+Deployment   : TTM_
+Current time : 6/10/2012 6:08:13 PM
+Start at     : 6/12/2012 12:00:00 PM
+Comment:
+AWAC on APL-UW Tidal Turbulence Mooring at Admiralty Head, times PDT
+------------------------------------------------------------
+Profile interval      (s) : 1
+Number of cells           : 20
+Cell size             (m) : 1.00
+Average interval      (s) : 1
+Blanking distance     (m) : 0.40
+Measurement load      (%) : 88
+Power level               : HIGH
+Number of wave samples    : N/A
+Wave interval         (s) : N/A
+Wave sampling rate   (Hz) : N/A
+Wave cell size        (m) : N/A
+Wave AST window start (m) : N/A
+Wave AST window size  (m) : N/A
+Wave AST find first peak  : N/A
+Wave AST qual. threshold  : N/A
+Wave AST SUV mode         : N/A
+Compass upd. rate     (s) : 1
+Coordinate System         : ENU
+Speed of sound      (m/s) : MEASURED
+Salinity            (ppt) : 30
+Analog input 1            : NONE
+Analog input 2            : NONE
+Analog input power out    : DISABLED
+File wrapping             : OFF
+Serial output/TellTale    : OFF
+------------------------------------------------------------
+Assumed duration   (days) : 2.5
+Battery utilization   (%) : 14.0
+Battery level         (V) : 13.8
+Recorder size        (MB) : 17592186044206
+Recorder free space  (MB) : 17592186044205.973
+Memory required      (MB) : 61.8
+Vertical vel. prec (cm/s) : 3.7
+Horizon. vel. prec (cm/s) : 11.2
+------------------------------------------------------------
+Instrument ID             : WPR 1549œ
+Head ID                   : WAV 6174
+Firmware version          : 3.33 AST
+------------------------------------------------------------
+AWAC AST Version 1.36
+Copyright (C) Nortek AS
+============================================================
+
+
+
+============================================================
+Deployment   : TTM_
+Current time : 6/10/2012 6:09:55 PM
+Start at     : 6/12/2012 12:00:00 PM
+Comment:
+AWAC on APL-UW Tidal Turbulence Mooring at Admiralty Head, times PDT
+------------------------------------------------------------
+Profile interval      (s) : 1
+Number of cells           : 20
+Cell size             (m) : 1.00
+Average interval      (s) : 1
+Blanking distance     (m) : 0.40
+Measurement load      (%) : 88
+Power level               : HIGH
+Number of wave samples    : N/A
+Wave interval         (s) : N/A
+Wave sampling rate   (Hz) : N/A
+Wave cell size        (m) : N/A
+Wave AST window start (m) : N/A
+Wave AST window size  (m) : N/A
+Wave AST find first peak  : N/A
+Wave AST qual. threshold  : N/A
+Wave AST SUV mode         : N/A
+Compass upd. rate     (s) : 1
+Coordinate System         : ENU
+Speed of sound      (m/s) : MEASURED
+Salinity            (ppt) : 30
+Analog input 1            : NONE
+Analog input 2            : NONE
+Analog input power out    : DISABLED
+File wrapping             : OFF
+Serial output/TellTale    : OFF
+------------------------------------------------------------
+Assumed duration   (days) : 2.5
+Battery utilization   (%) : 14.0
+Battery level         (V) : 13.8
+Recorder size        (MB) : 17592186044206
+Recorder free space  (MB) : 17592186044205.973
+Memory required      (MB) : 61.8
+Vertical vel. prec (cm/s) : 3.7
+Horizon. vel. prec (cm/s) : 11.2
+------------------------------------------------------------
+Instrument ID             : WPR 1549œ
+Head ID                   : WAV 6174
+Firmware version          : 3.33 AST
+------------------------------------------------------------
+AWAC AST Version 1.36
+Copyright (C) Nortek AS
+============================================================

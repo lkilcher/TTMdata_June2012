@@ -7,6 +7,7 @@
 *.hdr
 *.ssl
 *.pyc
+*.wpr
 
 # Ignore the decklog
 Admiralty_decklog_Jun2012.txt
