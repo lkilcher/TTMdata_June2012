@@ -12,8 +12,10 @@
 # Ignore the decklog
 Admiralty_decklog_Jun2012.txt
 
-# Ignore the SBE data
+# Ignore these data for now
 ct/
+TTM_xIMU_Jun2012/
+for_MHKDR/
 
 private/
 
