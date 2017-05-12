@@ -4,6 +4,7 @@ import dolfyn.adp.api as apm
 import numpy as np
 from dolfyn.data.time import date2num
 import datetime
+from os.path import isfile
 
 
 files = {
@@ -12,12 +13,6 @@ files = {
     'AWAC': 'TTM_AWAC_Jun2012 '
 }
 
-read_raw = True
-#read_raw = False
-
-do_awac = False
-do_awac = True
-
 
 def within(dat, range):
     return (range[0] < dat) & (dat < range[1])
@@ -25,11 +20,28 @@ def within(dat, range):
 trange = [date2num(datetime.datetime(2012, 6, 12, 18, 15, 0)),
           date2num(datetime.datetime(2012, 6, 14, 14, 41, 0))]
 
-if True:
+
+def process_adv(files=files, read_raw=None, savefiles=True):
+    """Process adv files.
+
+    Parameters
+    ----------
+
+    files : dict of {tag: fname} pairs
+
+    read_raw : True, False, None
+        Default (None): skip this step unless the output file doesn't
+        exist.
+
+    savefiles : boolean
+        Default: True, save the data. ``False`` is just for testing purposes.
+    """
+
     for tag, fname in files.iteritems():
         if tag == 'AWAC':
             continue
-        if read_raw:
+        if read_raw or (read_raw is None and
+                        not isfile('ADV/' + fname + '.h5')):
             dat = avm.read_nortek('ADV/' + fname + '.vec')
 
             dat.props['lon'] = -122.6858
@@ -46,8 +58,8 @@ if True:
                 # In meters, in ADV coord-system:
                 dat.props['body2head_vec'] = np.array([0.48, -0.07, -0.27])  # m
                 # Correct motion (+rotate to earth frame):
-
-            dat.save('ADV/' + fname + '.h5')
+            if savefiles:
+                dat.save('ADV/' + fname + '.h5')
         else:
             print('Loading file {}.h5...'.format(fname))
             dat = avm.load('ADV/' + fname + '.h5')
@@ -80,10 +92,10 @@ if True:
         avm.clean.GN2002(dat.v)
         avm.clean.GN2002(dat.w)
 
-        print('   saving...')
-        dat.save('ADV/' + fname + '_earth.h5')
+        if savefiles:
+            print('   saving...')
+            dat.save('ADV/' + fname + '_earth.h5')
 
-        print('   saving binned data...')
         bnr = avm.TurbBinner(n_bin=5 * 60 * dat.fs, fs=dat.fs)
         bd = bnr(dat)
         if tag == 'NREL':
@@ -99,7 +111,9 @@ if True:
             bd.add_data('Spec_velraw',
                         bnr.calc_vel_psd(dat.velraw, ),
                         'spec')
-        bd.save('ADV/' + fname + '_earth_b5m.h5')
+        if savefiles:
+            print('   saving binned data...')
+            bd.save('ADV/' + fname + '_earth_b5m.h5')
 
         print("   saving binned 'principal axes frame' data...")
         # Rotate to the principal coordinate system:
@@ -124,7 +138,8 @@ if True:
 
         print("   DONE.")
 
-if do_awac:
+
+def process_awac(savefiles=True):
 
     datawac = avm.read_nortek('TTM_AWAC/TTM_AWAC_Jun2012.wpr')
     datawac = datawac.subset(within(datawac.mpltime, trange))
@@ -135,18 +150,22 @@ if do_awac:
     datawac.props['doppler_noise'] = {'u': 0.12, 'v': 0.12, 'w': 0.048}
     datawac.props['fs'] = 1.0
     datawac.props['n_bin'] = 318  # 5min, 20sec.
-    datawac.save('TTM_AWAC/TTM_AWAC_Jun2012.h5')
+    if savefiles:
+        datawac.save('TTM_AWAC/TTM_AWAC_Jun2012.h5')
 
     bawac = apm.bin_adcp(datawac, datawac.props['n_bin'])
     bawac.add_data('Suu', bawac.psd(datawac._u))
-    bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_b5m.h5')
+    if savefiles:
+        bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_b5m.h5')
 
     datawac.calc_principal_angle(10)
     # The awac principal angle is 180degrees from the adv one.
     datawac.props['principal_angle'] += np.pi
     datawac.earth2principal()
-    datawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax.h5')
+    if savefiles:
+        datawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax.h5')
 
     bawac = apm.bin_adcp(datawac, datawac.props['n_bin'])
     bawac.add_data('Suu', bawac.psd(datawac._u))
-    bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax_b5m.h5')
+    if savefiles:
+        bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax_b5m.h5')
