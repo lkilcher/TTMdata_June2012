@@ -45,6 +45,10 @@ FILEINFO = [
          mhkdr + '49/AdmiraltyInlet_June2012.vec',
          678471678, 'cc077c26175887e8'),
 
+    Finf('ADV/TTM_PNNLvector_Jun2012.vec',
+         'https://www.dropbox.com/s/k470ncq7r5jthhz/TTM_PNNLvector_Jun2012.vec?dl=1',
+         147462928, '8ea62d15c2ac07c8'),
+
     Finf('TTM_AWAC/TTM_AWAC_Jun2012.wpr',
          'https://www.dropbox.com/s/uydsz1sy3dpgzrr/TTM_AWAC_Jun2012.wpr?dl=1',
          56513982, '5762067d9e1bed5e'),
