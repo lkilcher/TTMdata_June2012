@@ -86,17 +86,17 @@ for tag, fname in files.iteritems():
     bnr = avm.TurbBinner(n_bin=5 * 60 * dat.fs, fs=dat.fs)
     bd = bnr(dat)
     if tag == 'NREL':
-        bd.add_data('Spec_urot',
-                    bnr.calc_vel_psd(dat.urot, ),
+        bd.add_data('Spec_velrot',
+                    bnr.calc_vel_psd(dat.velrot, ),
                     'spec')
-        bd.add_data('Spec_uacc',
-                    bnr.calc_vel_psd(dat.uacc, ),
+        bd.add_data('Spec_velacc',
+                    bnr.calc_vel_psd(dat.velacc, ),
                     'spec')
-        bd.add_data('Spec_umot',
-                    bnr.calc_vel_psd(dat.urot + dat.uacc, ),
+        bd.add_data('Spec_velmot',
+                    bnr.calc_vel_psd(dat.velrot + dat.velacc, ),
                     'spec')
-        bd.add_data('Spec_uraw',
-                    bnr.calc_vel_psd(dat.uraw, ),
+        bd.add_data('Spec_velraw',
+                    bnr.calc_vel_psd(dat.velraw, ),
                     'spec')
     bd.save('ADV/' + fname + '_earth_b5m.h5')
 
@@ -107,17 +107,17 @@ for tag, fname in files.iteritems():
     bd2 = bnr(dat)
     # Save `binned` data.
     if tag == 'NREL':
-        bd2.add_data('Spec_urot',
-                     bnr.calc_vel_psd(dat.urot, ),
+        bd2.add_data('Spec_velrot',
+                     bnr.calc_vel_psd(dat.velrot, ),
                      'spec')
-        bd2.add_data('Spec_uacc',
-                     bnr.calc_vel_psd(dat.uacc, ),
+        bd2.add_data('Spec_velacc',
+                     bnr.calc_vel_psd(dat.velacc, ),
                      'spec')
-        bd2.add_data('Spec_umot',
-                     bnr.calc_vel_psd(dat.urot + dat.uacc, ),
+        bd2.add_data('Spec_velmot',
+                     bnr.calc_vel_psd(dat.velrot + dat.velacc, ),
                      'spec')
-        bd2.add_data('Spec_uraw',
-                     bnr.calc_vel_psd(dat.uraw, ),
+        bd2.add_data('Spec_velraw',
+                     bnr.calc_vel_psd(dat.velraw, ),
                      'spec')
     bd2.save('ADV/' + fname + '_pax_b5m.h5')
 
