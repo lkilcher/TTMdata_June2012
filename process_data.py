@@ -56,7 +56,8 @@ def process_adv(files=files, read_raw=None, savefiles=True):
             if tag == 'NREL':
                 dat.props['body2head_rotmat'] = np.eye(3)
                 # In meters, in ADV coord-system:
-                dat.props['body2head_vec'] = np.array([0.48, -0.07, -0.27])  # m
+                dat.props['body2head_vec'] = np.array(
+                    [0.48, -0.07, -0.27])  # m
                 # Correct motion (+rotate to earth frame):
             if savefiles:
                 dat.save('ADV/' + fname + '.h5')
@@ -84,7 +85,8 @@ def process_adv(files=files, read_raw=None, savefiles=True):
             avm.rotate.inst2earth(dat)
 
         print('   subsetting...')
-        # Crop the section of the data where the instrument was on the seafloor.
+        # Crop the section of the data where the instrument was on the
+        # seafloor.
         dat = dat.subset(within(dat.mpltime, trange))
 
         print('   cleaning...')
@@ -139,33 +141,46 @@ def process_adv(files=files, read_raw=None, savefiles=True):
         print("   DONE.")
 
 
-def process_awac(savefiles=True):
+def process_awac(savefiles=True, readbin=None):
 
-    datawac = avm.read_nortek('TTM_AWAC/TTM_AWAC_Jun2012.wpr')
-    datawac = datawac.subset(within(datawac.mpltime, trange))
-    datawac.props['coord_sys'] = 'earth'
-    #datawac.props['time_label'] = tlabel
-    #datawac.props['toff'] = toff
-    # From looking at spectra.
-    datawac.props['doppler_noise'] = {'u': 0.12, 'v': 0.12, 'w': 0.048}
-    datawac.props['fs'] = 1.0
-    datawac.props['n_bin'] = 318  # 5min, 20sec.
-    if savefiles:
-        datawac.save('TTM_AWAC/TTM_AWAC_Jun2012.h5')
+    if readbin or \
+       (readbin is None and not isfile('TTM_AWAC/TTM_AWAC_Jun2012.h5')):
+        datawac = apm.read_nortek('TTM_AWAC/TTM_AWAC_Jun2012.wpr')
+        datawac = datawac.subset(within(datawac.mpltime, trange))
+        datawac.props['coord_sys'] = 'earth'
+        #datawac.props['time_label'] = tlabel
+        #datawac.props['toff'] = toff
+        # From looking at spectra.
+        datawac.props['doppler_noise'] = [0.12, 0.12, 0.048]
+        datawac.props['fs'] = 1.0
+        datawac.props['n_bin'] = 318  # 5min, 20sec.
+        if savefiles:
+            datawac.save('TTM_AWAC/TTM_AWAC_Jun2012.h5')
+    else:
+        datawac = apm.load('TTM_AWAC/TTM_AWAC_Jun2012.h5')
 
-    bawac = apm.bin_adcp(datawac, datawac.props['n_bin'])
-    bawac.add_data('Suu', bawac.psd(datawac._u))
+    bnr = apm.binner(n_bin=datawac.props['n_bin'], fs=datawac.fs)
+    bawac = bnr(datawac)
+    bawac.add_data('Spec_vel', bnr.psd(datawac['vel']), 'Spec')
     if savefiles:
         bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_b5m.h5')
 
     datawac.calc_principal_angle(10)
     # The awac principal angle is 180degrees from the adv one.
     datawac.props['principal_angle'] += np.pi
-    datawac.earth2principal()
+    apm.earth2principal(datawac)
     if savefiles:
         datawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax.h5')
 
-    bawac = apm.bin_adcp(datawac, datawac.props['n_bin'])
-    bawac.add_data('Suu', bawac.psd(datawac._u))
+    bawac = bnr(datawac)
+    bawac.add_data('Spec_vel', bnr.psd(datawac['vel']), 'Spec')
     if savefiles:
         bawac.save('TTM_AWAC/TTM_AWAC_Jun2012_pax_b5m.h5')
+
+    return datawac
+
+
+if __name__ == '__main__':
+
+    process_adv()
+    process_awac()
