@@ -7,10 +7,9 @@ import datetime
 from os.path import isfile
 
 
-files = {
+adv_files = {
     'NREL': 'TTM_NRELvector_Jun2012',
     'PNNL': 'TTM_PNNLvector_Jun2012',
-    'AWAC': 'TTM_AWAC_Jun2012 '
 }
 
 
@@ -21,7 +20,7 @@ trange = [date2num(datetime.datetime(2012, 6, 12, 18, 15, 0)),
           date2num(datetime.datetime(2012, 6, 14, 14, 41, 0))]
 
 
-def process_adv(files=files, read_raw=None, savefiles=True):
+def process_adv(files=adv_files, read_raw=None, savefiles=True):
     """Process adv files.
 
     Parameters
@@ -38,27 +37,10 @@ def process_adv(files=files, read_raw=None, savefiles=True):
     """
 
     for tag, fname in files.iteritems():
-        if tag == 'AWAC':
-            continue
-        if read_raw or (read_raw is None and
-                        not isfile('ADV/' + fname + '.h5')):
+        if read_raw or \
+           (read_raw is None and
+                not isfile('ADV/' + fname + '.h5')):
             dat = avm.read_nortek('ADV/' + fname + '.vec')
-
-            dat.props['lon'] = -122.6858
-            dat.props['lat'] = 48.1515
-            dat.props['height_above_bottom'] = 11  # m
-            dat.props['total_water_depth'] = 58  # m
-            dat.props['z'] = dat.props['height_above_bottom'] - \
-                dat.props['total_water_depth']
-            # Declination taken from http://www.ngdc.noaa.gov/geomag-web/#declination
-            #  Options: IGRF, 48 09.090', 122 41.149', 2012-06-12
-            dat.props['declination'] = 16.79
-            if tag == 'NREL':
-                dat.props['body2head_rotmat'] = np.eye(3)
-                # In meters, in ADV coord-system:
-                dat.props['body2head_vec'] = np.array(
-                    [0.48, -0.07, -0.27])  # m
-                # Correct motion (+rotate to earth frame):
             if savefiles:
                 dat.save('ADV/' + fname + '.h5')
         else:
