@@ -2,8 +2,6 @@ from __future__ import print_function
 import dolfyn.adv.api as avm
 import dolfyn.adp.api as apm
 import numpy as np
-from dolfyn.data.time import date2num
-import datetime
 from os.path import isfile
 
 
@@ -15,9 +13,6 @@ adv_files = {
 
 def within(dat, range):
     return (range[0] < dat) & (dat < range[1])
-
-trange = [date2num(datetime.datetime(2012, 6, 12, 18, 15, 0)),
-          date2num(datetime.datetime(2012, 6, 14, 14, 41, 0))]
 
 
 def process_adv(files=adv_files, read_raw=None, savefiles=True):
@@ -69,7 +64,7 @@ def process_adv(files=adv_files, read_raw=None, savefiles=True):
         print('   subsetting...')
         # Crop the section of the data where the instrument was on the
         # seafloor.
-        dat = dat.subset(within(dat.mpltime, trange))
+        dat = dat.subset(within(dat.mpltime, dat.props['time_range']))
 
         print('   cleaning...')
         avm.clean.GN2002(dat.u)
