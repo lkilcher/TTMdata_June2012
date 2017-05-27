@@ -1,6 +1,12 @@
-from process_data import process_adv, process_awac
-import pull_data as pull
+import process_data as pd
+from pull_data import main as pull
 
-pull.main()
-process_adv()
-process_awac()
+
+def process():
+    pd.process_adv()
+    pd.process_awac()
+
+
+if __name__ == '__main__':
+    pull()
+    process()

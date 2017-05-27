@@ -1,1 +1,4 @@
 - Add AWAC data to MHKDR.
+- Add README (see J14)
+- Add map links?
+- Add license.

@@ -4,7 +4,6 @@ import ttm.base as pmod
 import matplotlib.pyplot as plt
 import numpy as np
 reload(pmod)
-plt.ion()
 from collections import defaultdict
 import matplotlib.dates as dt
 from calendar import month_name as month
