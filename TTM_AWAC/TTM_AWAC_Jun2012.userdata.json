@@ -1,0 +1,8 @@
+{"latlon": [48.1515,-122.6858],
+ "declination": 16.79,
+ "time_range": ["2012-06-12T18:15:00",
+                "2012-06-14T14:41:00"],
+ "height_above_bottom": 0.3,
+  "total_water_depth": 58,
+ "time_zone": "US/Pacific"
+}
