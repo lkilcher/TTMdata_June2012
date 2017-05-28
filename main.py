@@ -56,7 +56,7 @@ def load(tag, coordsys='pax', bin=False, **kwargs):
             raise Exception("Binned data is only stored in "
                             "the 'earth' and 'pax' coordinate systems.")
         return avm.load(finf.abs_fname +
-                        '{}_b5m.h5'.format(coordsys, ), **kwargs)
+                        '_{}_b5m.h5'.format(coordsys, ), **kwargs)
     else:
         if coordsys in ['earth', 'pax']:
             dat = avm.load(finf.abs_fname + '_earth.h5', **kwargs)
